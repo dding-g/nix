@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(darwin-rebuild switch:*)",
+      "Bash(nix run:*)",
+      "Bash(/nix/var/nix/profiles/default/bin/darwin-rebuild switch:*)",
+      "Bash(/run/current-system/sw/bin/darwin-rebuild switch:*)",
+      "Bash(echo:*)",
+      "Bash(source:*)"
+    ]
+  }
+}

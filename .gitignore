@@ -1,0 +1,10 @@
+# Git
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Nix
+result
+result-*
+.direnv/
