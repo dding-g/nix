@@ -116,6 +116,9 @@
       export PNPM_HOME="$HOME/Library/pnpm"
       export PATH="$PNPM_HOME:$PATH"
 
+      # brew app
+      export PATH="$HOME/.local/bin:$PATH"
+
       # ─────────────────────────────────────────
       # 커스텀 함수
       # ─────────────────────────────────────────
@@ -265,4 +268,116 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  # ═══════════════════════════════════════════════════════════
+  # VSCode 설정
+  # ═══════════════════════════════════════════════════════════
+  programs.vscode = {
+    enable = true;
+    enableUpdateCheck = false;
+    mutableExtensionsDir = true;  # 확장 수동 설치 허용
+
+    userSettings = {
+      "terminal.external.osxExec" = "Ghostty.app";
+    };
+  };
+
+  # ═══════════════════════════════════════════════════════════
+  # Ghostty (터미널 에뮬레이터)
+  # ═══════════════════════════════════════════════════════════
+  home.file.".config/ghostty/config".text = ''
+    # ─────────────────────────────────────────
+    # 쉘 설정 (핵심!)
+    # ─────────────────────────────────────────
+    command = /bin/zsh --login
+    shell-integration = zsh
+
+    # ─────────────────────────────────────────
+    # 폰트
+    # ─────────────────────────────────────────
+    font-family = JetBrainsMono Nerd Font
+    font-size = 14
+    font-thicken = true
+    adjust-cell-height = 20%
+
+    # ─────────────────────────────────────────
+    # 테마 - Catppuccin Mocha (인기 다크 테마)
+    # ─────────────────────────────────────────
+    background = 1e1e2e
+    foreground = cdd6f4
+    cursor-color = f5e0dc
+    selection-background = 45475a
+    selection-foreground = cdd6f4
+
+    # 기본 색상 (0-7)
+    palette = 0=#45475a
+    palette = 1=#f38ba8
+    palette = 2=#a6e3a1
+    palette = 3=#f9e2af
+    palette = 4=#89b4fa
+    palette = 5=#f5c2e7
+    palette = 6=#94e2d5
+    palette = 7=#bac2de
+
+    # 밝은 색상 (8-15)
+    palette = 8=#585b70
+    palette = 9=#f38ba8
+    palette = 10=#a6e3a1
+    palette = 11=#f9e2af
+    palette = 12=#89b4fa
+    palette = 13=#f5c2e7
+    palette = 14=#94e2d5
+    palette = 15=#a6adc8
+
+    # ─────────────────────────────────────────
+    # 창
+    # ─────────────────────────────────────────
+    window-padding-x = 16
+    window-padding-y = 12
+    window-decoration = true
+    macos-titlebar-style = hidden
+    background-opacity = 0.92
+    background-blur-radius = 20
+
+    # ─────────────────────────────────────────
+    # macOS
+    # ─────────────────────────────────────────
+    macos-option-as-alt = true
+
+    # ─────────────────────────────────────────
+    # 커서
+    # ─────────────────────────────────────────
+    cursor-style = block
+    cursor-style-blink = false
+
+    # ─────────────────────────────────────────
+    # 기타
+    # ─────────────────────────────────────────
+    copy-on-select = clipboard
+    confirm-close-surface = false
+  '';
+
+  # ═══════════════════════════════════════════════════════════
+  # Claude Code 글로벌 커맨드
+  # ═══════════════════════════════════════════════════════════
+  home.file.".claude/commands/commit.md".text = ''
+    ---
+    description: Git commit with conventional commit message
+    ---
+
+    변경사항을 분석하고 conventional commit 형식으로 커밋해주세요.
+
+    1. `git diff --staged`로 스테이징된 변경사항 확인
+    2. 변경사항이 없으면 `git add -A`로 모든 변경사항 스테이징
+    3. 변경 내용을 분석하여 적절한 커밋 메시지 작성:
+       - feat: 새로운 기능
+       - fix: 버그 수정
+       - docs: 문서 변경
+       - style: 코드 포맷팅
+       - refactor: 리팩토링
+       - test: 테스트 추가/수정
+       - chore: 빌드, 설정 변경
+    4. 커밋 메시지는 한글로 작성
+    5. 커밋 실행
+  '';
 }

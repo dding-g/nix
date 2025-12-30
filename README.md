@@ -9,6 +9,7 @@
 # 실행 순서
 
 ```sh
+    brew install gh
+    gh auth login
     sudo nix run nix-darwin -- switch --flake .
-
 ```

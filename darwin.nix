@@ -35,19 +35,20 @@
     lazygit
     jq
     yq
-    gh        # GitHub CLI
     
     # ─────────────────────────────────────────
     # Node.js
     # ─────────────────────────────────────────
-    nodejs_22
+    nodejs_24
     pnpm
+    bun
+    volta
     
     # ─────────────────────────────────────────
     # AWS / DevOps
     # ─────────────────────────────────────────
     awscli2
-    # terraform
+    terraform
   ];
 
   # ═══════════════════════════════════════════════════════════
@@ -62,7 +63,7 @@
     };
     
     taps = [
-      "homebrew/cask-fonts"
+      # 폰트는 이제 homebrew-cask에 통합됨
     ];
     
     brews = [
@@ -84,13 +85,21 @@
       # ─────────────────────────────────────────
       # 개발 도구
       # ─────────────────────────────────────────
-      "docker"
-      "postman"
+      "docker-desktop"
+      "insomnia"
+      "android-studio"
+      "temurin"  # OpenJDK (Eclipse Temurin)
+
+      # ─────────────────────────────────────────
+      # AI 도구
+      # ─────────────────────────────────────────
+      "claude-code"
+      "warp"
       
       # ─────────────────────────────────────────
       # 브라우저
       # ─────────────────────────────────────────
-      "arc"
+      "zen"
       "google-chrome"
       
       # ─────────────────────────────────────────
@@ -109,7 +118,7 @@
     masApps = {
       # mas search <app> 으로 ID 확인
       "KakaoTalk" = 869223134;
-      # "Xcode" = 497799835;
+      "Xcode" = 497799835;
     };
   };
 
@@ -150,6 +159,7 @@
       ApplePressAndHoldEnabled = false;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSAutomaticCapitalizationEnabled = false;
+      "com.apple.keyboard.fnState" = true;  # F1, F2 등을 표준 기능 키로 사용
     };
     
     # ─────────────────────────────────────────
@@ -158,6 +168,18 @@
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
+    };
+
+    # ─────────────────────────────────────────
+    # 단축키 (Spotlight 비활성화)
+    # ─────────────────────────────────────────
+    CustomUserPreferences = {
+      "com.apple.symbolichotkeys" = {
+        AppleSymbolicHotKeys = {
+          "64" = { enabled = false; };  # Cmd+Space (Spotlight) 비활성화
+          "65" = { enabled = false; };  # Cmd+Alt+Space 비활성화
+        };
+      };
     };
   };
 
