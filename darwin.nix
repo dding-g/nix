@@ -68,6 +68,7 @@
     
     brews = [
       "mas"  # Mac App Store CLI
+      "openjdk@17" # Java for React Navtive
     ];
     
     casks = [
@@ -88,7 +89,6 @@
       "docker-desktop"
       "insomnia"
       "android-studio"
-      "temurin"  # OpenJDK (Eclipse Temurin)
 
       # ─────────────────────────────────────────
       # AI 도구

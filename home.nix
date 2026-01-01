@@ -97,6 +97,7 @@
       # 개발
       # ─────────────────────────────────────────
       pn = "pnpm";
+      claude-yolo = "claude --dangerously-skip-permissions";
       
       # ─────────────────────────────────────────
       # 디렉토리 이동
@@ -118,6 +119,9 @@
 
       # brew app
       export PATH="$HOME/.local/bin:$PATH"
+
+      # Java (Homebrew Temurin)
+      export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 
       # ─────────────────────────────────────────
       # 커스텀 함수
