@@ -27,6 +27,21 @@
       push.autoSetupRemote = true;
       pull.rebase = true;
       core.editor = "nvim";
+
+      # ─────────────────────────────────────────
+      # Delta (더 예쁜 diff)
+      # ─────────────────────────────────────────
+      core.pager = "delta";
+      interactive.diffFilter = "delta --color-only";
+      delta = {
+        navigate = true;
+        side-by-side = true;
+        line-numbers = true;
+        syntax-theme = "Catppuccin Mocha";
+      };
+      merge.conflictstyle = "diff3";
+      diff.colorMoved = "default";
+
       alias = {
         st = "status";
         co = "checkout";
@@ -107,6 +122,31 @@
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
+
+      # ─────────────────────────────────────────
+      # 시스템 / 유틸리티
+      # ─────────────────────────────────────────
+      top = "btop";          # 시스템 모니터
+      du = "dust";           # 디스크 사용량
+      df = "duf";            # 디스크 여유 공간
+      ps = "procs";          # 프로세스 목록
+
+      # IP 주소 확인
+      myip = "curl -s ifconfig.me";
+      localip = "ipconfig getifaddr en0";
+
+      # 빠른 서버
+      serve = "python3 -m http.server 8000";
+
+      # 클립보드
+      copy = "pbcopy";
+      paste = "pbpaste";
+
+      # 자주 쓰는 명령
+      c = "clear";
+      q = "exit";
+      h = "history";
+      path = "echo $PATH | tr ':' '\\n'";
     };
     
     initContent = ''

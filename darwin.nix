@@ -35,6 +35,17 @@
     lazygit
     jq
     yq
+    delta     # git diff 뷰어
+    gh        # GitHub CLI
+
+    # ─────────────────────────────────────────
+    # 시스템 모니터링
+    # ─────────────────────────────────────────
+    htop      # 프로세스 모니터
+    btop      # 더 예쁜 시스템 모니터
+    dust      # du 대체 (디스크 사용량)
+    duf       # df 대체 (디스크 여유 공간)
+    procs     # ps 대체
     
     # ─────────────────────────────────────────
     # Node.js
@@ -171,6 +182,15 @@
     };
 
     # ─────────────────────────────────────────
+    # 스크린샷
+    # ─────────────────────────────────────────
+    screencapture = {
+      location = "~/Pictures/Screenshots";
+      type = "png";
+      disable-shadow = true;  # 그림자 제거
+    };
+
+    # ─────────────────────────────────────────
     # 단축키 (Spotlight 비활성화)
     # ─────────────────────────────────────────
     CustomUserPreferences = {
@@ -179,6 +199,11 @@
           "64" = { enabled = false; };  # Cmd+Space (Spotlight) 비활성화
           "65" = { enabled = false; };  # Cmd+Alt+Space 비활성화
         };
+      };
+      # .DS_Store 파일 네트워크 드라이브에 생성 안 함
+      "com.apple.desktopservices" = {
+        DSDontWriteNetworkStores = true;
+        DSDontWriteUSBStores = true;
       };
     };
   };
