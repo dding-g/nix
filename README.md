@@ -12,4 +12,5 @@
     brew install gh
     gh auth login
     sudo nix run nix-darwin -- switch --flake .
+    # or sudo darwin-rebuild switch --flake .
 ```

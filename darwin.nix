@@ -95,6 +95,7 @@
       "cursor"
       "sublime-text"
       "antigravity"
+      "zed"
       
       # ─────────────────────────────────────────
       # 개발 도구
@@ -102,6 +103,8 @@
       "docker-desktop"
       "insomnia"
       "android-studio"
+      "figma"
+      "android-platform-tools"
 
       # ─────────────────────────────────────────
       # AI 도구
