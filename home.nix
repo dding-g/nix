@@ -314,19 +314,6 @@
   };
 
   # ═══════════════════════════════════════════════════════════
-  # VSCode 설정
-  # ═══════════════════════════════════════════════════════════
-  programs.vscode = {
-    enable = true;
-    enableUpdateCheck = false;
-    mutableExtensionsDir = true;  # 확장 수동 설치 허용
-
-    userSettings = {
-      "terminal.external.osxExec" = "Ghostty.app";
-    };
-  };
-
-  # ═══════════════════════════════════════════════════════════
   # Ghostty (터미널 에뮬레이터)
   # ═══════════════════════════════════════════════════════════
   home.file.".config/ghostty/config".text = ''

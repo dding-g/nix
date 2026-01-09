@@ -1,6 +1,19 @@
 {
   "permissions": {
-    "allow": [],
+    "allow": ["Bash(sudo darwin-rebuild switch:*)", "Bash(nix run:*)"],
     "deny": []
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_INPUT\" == *\"darwin-rebuild switch\"* ]]; then echo '\\n🧹 Running garbage collection...'; nix-collect-garbage -d; fi"
+          }
+        ]
+      }
+    ]
   }
 }
