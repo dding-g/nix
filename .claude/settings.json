@@ -11,6 +11,10 @@
           {
             "type": "command",
             "command": "if [[ \"$CLAUDE_TOOL_INPUT\" == *\"darwin-rebuild switch\"* ]]; then echo '\\n🧹 Running garbage collection...'; nix-collect-garbage -d; fi"
+          },
+          {
+            "type": "command",
+            "command": "if [[ \"$CLAUDE_TOOL_INPUT\" == *\"git commit\"* ]]; then echo '\\n🚀 Pushing to remote...'; git push origin HEAD; fi"
           }
         ]
       }
