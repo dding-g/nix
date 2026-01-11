@@ -21,6 +21,7 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | `mas` | Mac App Store CLI |
 | `openjdk@17` | Java (React Native) |
 | `gemini-cli` | Google Gemini CLI |
+| `railway` | Railway 배포 CLI |
 
 ### GUI 앱 (Homebrew Casks)
 | 카테고리 | 앱 |

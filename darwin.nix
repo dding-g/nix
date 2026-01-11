@@ -78,7 +78,8 @@
     brews = [
       "mas"  # Mac App Store CLI
       "openjdk@17" # Java for React Navtive
-      "gemini-cli"
+      "gemini-cli" # Gemini
+      "railway" # Python deploy
     ];
 
     casks = [
