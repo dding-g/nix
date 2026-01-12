@@ -92,6 +92,7 @@
       "sublime-text"
       "zed"
       "opencode-desktop"
+      "cursor"
 
       # ─────────────────────────────────────────
       # 개발 도구
@@ -101,6 +102,7 @@
       "android-studio"
       "figma"
       "android-platform-tools"
+      "apidog"
 
       # ─────────────────────────────────────────
       # AI 도구

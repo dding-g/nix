@@ -8,3 +8,6 @@
 result
 result-*
 .direnv/
+
+# Environment
+.env

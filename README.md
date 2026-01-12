@@ -69,21 +69,52 @@ gh auth login
 gh repo clone ddingg/nix ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 
-# 첫 실행 (환경변수로 사용자/호스트명 설정)
-NIX_USER=myuser NIX_HOSTNAME=my-mac sudo nix run nix-darwin -- switch --flake . --impure
+# 환경변수 설정
+cp .env.example .env
+# .env 파일을 열어 NIX_USER, NIX_HOSTNAME 값 설정
+
+# 첫 실행
+source .env && sudo nix run nix-darwin -- switch --flake . --impure
 
 # 이후 업데이트
-NIX_USER=myuser NIX_HOSTNAME=my-mac darwin-rebuild switch --flake . --impure
+source .env && darwin-rebuild switch --flake . --impure
 ```
 
-## 환경변수
+## 환경변수 설정
 
-| 변수 | 설명 | 기본값 |
-|------|------|--------|
-| `NIX_USER` | macOS 사용자명 | `matthew` |
-| `NIX_HOSTNAME` | 호스트명 | `matthewui-MacBookPro` |
+### 1. .env 파일 생성
 
-환경변수 사용 시 `--impure` 플래그가 필요합니다. 환경변수를 설정하지 않으면 기본값이 사용됩니다.
+```bash
+cp .env.example .env
+```
+
+### 2. 값 확인 및 설정
+
+```bash
+# 사용자명 확인
+whoami
+
+# 호스트명 확인
+hostname
+```
+
+### 3. .env 파일 수정
+
+```bash
+# .env
+NIX_USER=myuser
+NIX_HOSTNAME=my-mac
+```
+
+### 환경변수 목록
+
+| 변수 | 설명 | 확인 방법 | 기본값 |
+|------|------|----------|--------|
+| `NIX_USER` | macOS 사용자명 | `whoami` | `matthew` |
+| `NIX_HOSTNAME` | 호스트명 | `hostname` | `matthewui-MacBookPro` |
+
+> `.env` 파일은 `.gitignore`에 포함되어 있어 개인 설정이 저장소에 커밋되지 않습니다.
+> 환경변수 사용 시 `--impure` 플래그가 필요합니다.
 
 ## 주요 명령어
 
