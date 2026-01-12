@@ -78,6 +78,7 @@
       "openjdk@17" # Java for React Navtive
       "gemini-cli" # Gemini
       "railway" # Python deploy
+      "git-flow"
     ];
 
     casks = [
