@@ -11,7 +11,7 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | Modern CLI | `eza` `bat` `ripgrep` `fd` `fzf` |
 | 개발 | `lazygit` `jq` `yq` `delta` `gh` |
 | 모니터링 | `htop` `btop` `dust` `duf` `procs` |
-| Node.js | `pnpm` `bun` `volta` |
+| Node.js | `volta` |
 | DevOps | `awscli2` `terraform` |
 | 사용자 | `httpie` `tldr` `tree` |
 
@@ -29,9 +29,9 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | 터미널 | Ghostty |
 | 에디터 | Sublime Text, Zed, OpenCode Desktop |
 | 개발 | Docker Desktop, Insomnia, Android Studio, Figma, Android Platform Tools |
-| AI | Claude, Claude Code, ChatGPT, Warp |
+| AI | Claude, Claude Code, ChatGPT |
 | 브라우저 | Zen, Google Chrome |
-| 생산성 | Raycast, Notion, Slack |
+| 생산성 | Raycast, Notion, Slack, Itsycal |
 | 폰트 | JetBrains Mono Nerd Font |
 
 ### Mac App Store
