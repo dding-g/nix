@@ -69,12 +69,21 @@ gh auth login
 gh repo clone ddingg/nix ~/.config/nix-darwin
 cd ~/.config/nix-darwin
 
-# 첫 실행
-sudo nix run nix-darwin -- switch --flake .
+# 첫 실행 (환경변수로 사용자/호스트명 설정)
+NIX_USER=myuser NIX_HOSTNAME=my-mac sudo nix run nix-darwin -- switch --flake . --impure
 
 # 이후 업데이트
-darwin-rebuild switch --flake .
+NIX_USER=myuser NIX_HOSTNAME=my-mac darwin-rebuild switch --flake . --impure
 ```
+
+## 환경변수
+
+| 변수 | 설명 | 기본값 |
+|------|------|--------|
+| `NIX_USER` | macOS 사용자명 | `matthew` |
+| `NIX_HOSTNAME` | 호스트명 | `matthewui-MacBookPro` |
+
+환경변수 사용 시 `--impure` 플래그가 필요합니다. 환경변수를 설정하지 않으면 기본값이 사용됩니다.
 
 ## 주요 명령어
 

@@ -17,8 +17,9 @@
 
   outputs = inputs@{ self, nixpkgs, nix-darwin, home-manager }:
   let
-    username = "ddingg";
-    hostname = "jomyeong-geun-ui-MacBookPro";
+    # 환경변수에서 읽거나 기본값 사용 (--impure 플래그 필요)
+    username = let env = builtins.getEnv "NIX_USER"; in if env != "" then env else "matthew";
+    hostname = let env = builtins.getEnv "NIX_HOSTNAME"; in if env != "" then env else "matthewui-MacBookPro";
     system = "aarch64-darwin";
   in
   {
