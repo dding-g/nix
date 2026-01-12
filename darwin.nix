@@ -125,6 +125,7 @@
       "slack"
       "itsycal"
       "obsidian"
+      "linear-linear"
 
       # ─────────────────────────────────────────
       # 폰트
