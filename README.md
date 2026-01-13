@@ -22,16 +22,17 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | `openjdk@17` | Java (React Native) |
 | `gemini-cli` | Google Gemini CLI |
 | `railway` | Railway 배포 CLI |
+| `git-flow` | Git Flow 워크플로우 |
 
 ### GUI 앱 (Homebrew Casks)
 | 카테고리 | 앱 |
 |----------|-----|
 | 터미널 | Ghostty |
-| 에디터 | Sublime Text, Zed, OpenCode Desktop |
-| 개발 | Docker Desktop, Insomnia, Android Studio, Figma, Android Platform Tools |
+| 에디터 | Sublime Text, Zed, OpenCode Desktop, Cursor |
+| 개발 | Docker Desktop, Insomnia, Android Studio, Figma, Android Platform Tools, Apidog |
 | AI | Claude, Claude Code, ChatGPT |
 | 브라우저 | Zen, Google Chrome |
-| 생산성 | Raycast, Notion, Slack, Itsycal |
+| 생산성 | Raycast, Notion, Slack, Itsycal, Obsidian, Linear |
 | 폰트 | JetBrains Mono Nerd Font |
 
 ### Mac App Store

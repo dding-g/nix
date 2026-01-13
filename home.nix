@@ -96,6 +96,7 @@
       gl = "git pull";
       gco = "git checkout";
       gcm = "git commit -m";
+      gph = "git push origin HEAD";
       gd = "git diff";
       ga = "git add";
       gaa = "git add -A";
