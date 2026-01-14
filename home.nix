@@ -189,6 +189,11 @@
 
       # 빠른 파일 검색 + 미리보기
       ff() { fzf --preview "bat --color=always {}" }
+
+      # ─────────────────────────────────────────
+      # 로컬 환경변수 (git에 포함되지 않음)
+      # ─────────────────────────────────────────
+      [ -f ~/.zshrc.local ] && source ~/.zshrc.local
     '';
   };
 
@@ -400,6 +405,6 @@
     # 기타
     # ─────────────────────────────────────────
     copy-on-select = clipboard
-    confirm-close-surface = false
+    confirm-close-surface = true
   '';
 }

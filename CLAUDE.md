@@ -36,7 +36,7 @@
 
 ```bash
 # 설정 적용 (수정 후 항상 실행)
-darwin-rebuild switch --flake .
+source .env && darwin-rebuild switch --flake . --impure
 
 # 패키지 검색
 nix search nixpkgs <package-name>
@@ -58,7 +58,7 @@ darwin-rebuild --rollback
 
 - **username**: ddingg (macOS 사용자명)
 - **system**: aarch64-darwin (Apple Silicon)
-- **hostname**: macbook
+- **hostname**: jomyeong-geun-ui-MacBookPro
 
 ## 작업 규칙
 

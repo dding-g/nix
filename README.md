@@ -112,8 +112,8 @@ NIX_HOSTNAME=my-mac
 
 | 변수 | 설명 | 확인 방법 | 기본값 |
 |------|------|----------|--------|
-| `NIX_USER` | macOS 사용자명 | `whoami` | `matthew` |
-| `NIX_HOSTNAME` | 호스트명 | `hostname` | `matthewui-MacBookPro` |
+| `NIX_USER` | macOS 사용자명 | `whoami` | `ddingg` |
+| `NIX_HOSTNAME` | 호스트명 | `hostname` | `jomyeong-geun-ui-MacBookPro` |
 
 > `.env` 파일은 `.gitignore`에 포함되어 있어 개인 설정이 저장소에 커밋되지 않습니다.
 > 환경변수 사용 시 `--impure` 플래그가 필요합니다.
