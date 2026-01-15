@@ -104,6 +104,19 @@
       lg = "lazygit";
 
       # ─────────────────────────────────────────
+      # Git Flow
+      # ─────────────────────────────────────────
+      gfi = "git flow init";
+      gffs = "git flow feature start";
+      gfff = "git flow feature finish";
+      gffp = "git flow feature publish";
+      gfft = "git flow feature track";
+      gfrs = "git flow release start";
+      gfrf = "git flow release finish";
+      gfhs = "git flow hotfix start";
+      gfhf = "git flow hotfix finish";
+
+      # ─────────────────────────────────────────
       # Nix
       # ─────────────────────────────────────────
       rebuild = "darwin-rebuild switch --flake ~/.config/nix-darwin";
