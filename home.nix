@@ -20,8 +20,8 @@
 
     settings = {
       user = {
-        name = "ddingg";
-        email = "your@email.com";  # TODO: 이메일 변경
+        name = "dding-g";
+        email = "area409@gmail.com";
       };
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
