@@ -20,6 +20,7 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | 패키지 | 설명 |
 |--------|------|
 | `mas` | Mac App Store CLI |
+| `mackup` | 앱 설정 백업/복원 (iCloud) |
 | `openjdk@17` | Java (React Native) |
 | `gemini-cli` | Google Gemini CLI |
 | `railway` | Railway 배포 CLI |
@@ -126,17 +127,39 @@ nix-clean    # 가비지 컬렉션
 nix-update   # flake 업데이트
 ```
 
+## 앱 설정 관리 (Mackup)
+
+앱 설정 파일(Ghostty, Zed, Claude Code 등)은 Mackup을 통해 iCloud로 백업/복원합니다.
+
+```bash
+# 설정 백업 (변경 후 실행)
+mackup backup
+
+# 새 Mac에서 복원
+mackup restore
+
+# 지원 앱 확인
+mackup list | grep <app>
+```
+
+백업 위치: `~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/`
+
 ## 파일 구조
 
 ```
 .
-├── flake.nix      # Flake 진입점
-├── darwin.nix     # 시스템 설정 (패키지, Homebrew, macOS)
-├── home.nix       # 사용자 설정 (shell, git, dotfiles)
-├── CLAUDE.md      # AI 어시스턴트용 컨텍스트
-└── docs/          # 도구별 사용 가이드
+├── flake.nix                   # Flake 진입점
+├── darwin.nix                  # 시스템 모듈 진입점
+├── home.nix                    # 홈 모듈 진입점
+├── modules/
+│   ├── darwin/                 # 시스템 레벨 모듈
+│   │   ├── packages.nix        # CLI 도구 (Nix)
+│   │   ├── homebrew.nix        # Homebrew casks/brews
+│   │   └── system.nix          # macOS defaults
+│   └── home/                   # 사용자 레벨 모듈
+│       ├── git.nix             # Git 설정
+│       ├── shell.nix           # Zsh + aliases
+│       ├── starship.nix        # 프롬프트
+│       └── programs.nix        # fzf, direnv, zoxide
+└── CLAUDE.md                   # AI 어시스턴트용 컨텍스트
 ```
-
-## 문서
-
-자세한 도구 사용법은 [docs/README.md](./docs/README.md) 참조.

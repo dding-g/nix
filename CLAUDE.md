@@ -15,21 +15,23 @@
 
 ```
 .
-├── flake.nix           # 진입점 - inputs 및 outputs 정의
-├── flake.lock          # 의존성 버전 락 파일
-├── darwin.nix          # 시스템 레벨 설정 (패키지, Homebrew, macOS defaults)
-├── home.nix            # 사용자 레벨 설정 (shell, git, dotfiles)
-├── modules/            # 기능별 분리된 모듈
-│   ├── darwin/         # 시스템 모듈
-│   │   ├── homebrew.nix
-│   │   ├── system.nix
-│   │   └── packages.nix
-│   └── home/           # 홈 매니저 모듈
-│       ├── shell.nix
-│       ├── git.nix
-│       ├── dev.nix
-│       └── programs.nix
-└── CLAUDE.md           # 이 파일
+├── flake.nix                   # 진입점 - inputs 및 outputs 정의
+├── flake.lock                  # 의존성 버전 락 파일
+├── darwin.nix                  # 시스템 모듈 진입점 (imports만)
+├── home.nix                    # 홈 모듈 진입점 (imports만)
+├── modules/
+│   ├── darwin/                 # 시스템 레벨 모듈
+│   │   ├── default.nix         # darwin 모듈 진입점
+│   │   ├── packages.nix        # 시스템 패키지 (CLI 도구)
+│   │   ├── homebrew.nix        # Homebrew casks/brews
+│   │   └── system.nix          # macOS defaults, 보안, 사용자 설정
+│   └── home/                   # 사용자 레벨 모듈
+│       ├── default.nix         # home 모듈 진입점 + Mackup 설정
+│       ├── git.nix             # Git 설정
+│       ├── shell.nix           # Zsh 설정 + aliases
+│       ├── starship.nix        # 프롬프트 설정
+│       └── programs.nix        # fzf, direnv, zoxide
+└── CLAUDE.md                   # 이 파일
 ```
 
 ## 핵심 명령어
@@ -68,19 +70,31 @@ darwin-rebuild --rollback
 3. 점진적 변경 - 한 번에 너무 많이 바꾸지 않기
 
 ### 패키지 추가 시
-- CLI 도구: `darwin.nix` → `environment.systemPackages`
-- GUI 앱 (macOS): `darwin.nix` → `homebrew.casks`
-- Mac App Store: `darwin.nix` → `homebrew.masApps`
-- 사용자 도구/dotfiles: `home.nix`
+| 패키지 유형 | 추가할 파일 |
+|------------|-----------|
+| CLI 도구 (Nix) | `modules/darwin/packages.nix` → `environment.systemPackages` |
+| Homebrew brew | `modules/darwin/homebrew.nix` → `homebrew.brews` |
+| GUI 앱 (Cask) | `modules/darwin/homebrew.nix` → `homebrew.casks` |
+| Mac App Store | `modules/darwin/homebrew.nix` → `homebrew.masApps` |
+| 사용자 도구 | `modules/home/programs.nix` → `home.packages` |
 
-### 모듈 분리 기준
-- 단일 파일이 100줄 초과 시 모듈로 분리 고려
-- 관련 설정끼리 그룹화 (shell, git, dev 등)
+### Shell alias 추가
+`modules/home/shell.nix` → `programs.zsh.shellAliases`
+
+### macOS 기본값 변경
+`modules/darwin/system.nix` → `system.defaults`
+
+### 앱 설정 파일 관리 (Mackup)
+앱 설정 파일은 Mackup을 통해 iCloud로 백업/복원됩니다.
+- 설정 변경 후 백업: `mackup backup`
+- 새 Mac에서 복원: `mackup restore`
+- 백업 위치: `~/Library/Mobile Documents/com~apple~CloudDocs/Mackup/`
 
 ## 자주 사용하는 패턴
 
-### 패키지 추가
+### Nix 패키지 추가
 ```nix
+# modules/darwin/packages.nix
 environment.systemPackages = with pkgs; [
   existing-package
   new-package  # 여기에 추가
@@ -89,6 +103,7 @@ environment.systemPackages = with pkgs; [
 
 ### Homebrew Cask 추가
 ```nix
+# modules/darwin/homebrew.nix
 homebrew.casks = [
   "existing-app"
   "new-app"  # 여기에 추가
@@ -97,6 +112,7 @@ homebrew.casks = [
 
 ### Shell alias 추가
 ```nix
+# modules/home/shell.nix
 programs.zsh.shellAliases = {
   existing = "command";
   newalias = "new-command";  # 여기에 추가
@@ -105,6 +121,7 @@ programs.zsh.shellAliases = {
 
 ### macOS 기본값 변경
 ```nix
+# modules/darwin/system.nix
 system.defaults.dock.autohide = true;
 system.defaults.finder.ShowPathbar = true;
 ```
@@ -125,6 +142,11 @@ system.defaults.finder.ShowPathbar = true;
 nix search nixpkgs <name>
 # 또는 https://search.nixos.org/packages 에서 검색
 ```
+
+### Mackup 관련
+- 지원 앱 확인: `mackup list | grep <app>`
+- 백업 상태 확인: `ls -la ~/Library/Mobile\ Documents/com~apple~CloudDocs/Mackup/`
+- 복원 후 앱 재시작 필요
 
 ## 참고 리소스
 
