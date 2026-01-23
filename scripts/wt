@@ -1,0 +1,195 @@
+#!/bin/bash
+
+# Git Worktree Manager for Syncly
+# Simplifies git worktree add/remove operations
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Helper functions
+print_error() {
+    echo -e "${RED}Error:${NC} $1" >&2
+}
+
+print_success() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+print_info() {
+    echo -e "${BLUE}→${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}Warning:${NC} $1"
+}
+
+# Check if we're in a git repository
+check_git_repo() {
+    if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+        print_error "Not a git repository"
+        exit 1
+    fi
+}
+
+# Get the project name from the current directory
+get_project_name() {
+    basename "$(git rev-parse --show-toplevel)"
+}
+
+# Get the parent directory of the git root
+get_parent_dir() {
+    dirname "$(git rev-parse --show-toplevel)"
+}
+
+# Get the git root directory
+get_git_root() {
+    git rev-parse --show-toplevel
+}
+
+# Show usage information
+show_usage() {
+    echo "Git Worktree Manager"
+    echo ""
+    echo "Usage:"
+    echo "  wt add <branch-name>    Create new worktree with branch (alias: a)"
+    echo "  wt remove <branch-name> Remove worktree (alias: rm)"
+    echo "  wt list                 List all worktrees (alias: ls)"
+    echo "  wt help                 Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  wt add feature-login    # Creates ../syncly-feature-login worktree"
+    echo "  wt rm feature-login     # Removes the worktree (keeps branch)"
+    echo "  wt ls                   # Lists all worktrees"
+}
+
+# Add a new worktree
+cmd_add() {
+    local branch_name="$1"
+
+    if [[ -z "$branch_name" ]]; then
+        print_error "Branch name required"
+        echo "Usage: wt add <branch-name>"
+        exit 1
+    fi
+
+    check_git_repo
+
+    local project_name
+    project_name=$(get_project_name)
+    local parent_dir
+    parent_dir=$(get_parent_dir)
+    local git_root
+    git_root=$(get_git_root)
+    local worktree_path="${parent_dir}/${project_name}-${branch_name}"
+
+    # Check if worktree already exists
+    if [[ -d "$worktree_path" ]]; then
+        print_error "Worktree already exists at: $worktree_path"
+        exit 1
+    fi
+
+    # Check if branch already exists
+    if git show-ref --verify --quiet "refs/heads/${branch_name}"; then
+        print_warning "Branch '${branch_name}' already exists, using existing branch"
+        print_info "Creating worktree at: $worktree_path"
+        git worktree add "$worktree_path" "$branch_name"
+    else
+        print_info "Creating new branch '${branch_name}' and worktree at: $worktree_path"
+        git worktree add -b "$branch_name" "$worktree_path"
+    fi
+    print_success "Worktree created"
+
+    # Copy .env.local if it exists
+    if [[ -f "${git_root}/.env.local" ]]; then
+        print_info "Copying .env.local to new worktree"
+        cp "${git_root}/.env.local" "${worktree_path}/.env.local"
+        print_success ".env.local copied"
+    else
+        print_warning "No .env.local found in source directory"
+    fi
+
+    # Run pnpm install if package.json exists
+    if [[ -f "${worktree_path}/package.json" ]]; then
+        print_info "Running pnpm install..."
+        (cd "$worktree_path" && pnpm install)
+        print_success "Dependencies installed"
+    fi
+
+    echo ""
+    print_success "Worktree ready at: $worktree_path"
+    echo -e "  ${BLUE}cd${NC} $worktree_path"
+}
+
+# Remove a worktree
+cmd_remove() {
+    local branch_name="$1"
+
+    if [[ -z "$branch_name" ]]; then
+        print_error "Branch name required"
+        echo "Usage: wt remove <branch-name>"
+        exit 1
+    fi
+
+    check_git_repo
+
+    local project_name
+    project_name=$(get_project_name)
+    local parent_dir
+    parent_dir=$(get_parent_dir)
+    local worktree_path="${parent_dir}/${project_name}-${branch_name}"
+
+    # Check if worktree exists
+    if [[ ! -d "$worktree_path" ]]; then
+        print_error "Worktree not found at: $worktree_path"
+        exit 1
+    fi
+
+    print_info "Removing worktree at: $worktree_path"
+    git worktree remove "$worktree_path"
+    print_success "Worktree removed (branch '${branch_name}' preserved)"
+}
+
+# List all worktrees
+cmd_list() {
+    check_git_repo
+
+    echo -e "${BLUE}Git Worktrees:${NC}"
+    echo ""
+    git worktree list
+}
+
+# Main command dispatcher
+main() {
+    local command="${1:-}"
+
+    case "$command" in
+        add|a)
+            shift
+            cmd_add "$@"
+            ;;
+        remove|rm)
+            shift
+            cmd_remove "$@"
+            ;;
+        list|ls)
+            cmd_list
+            ;;
+        help|--help|-h|"")
+            show_usage
+            ;;
+        *)
+            print_error "Unknown command: $command"
+            echo ""
+            show_usage
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

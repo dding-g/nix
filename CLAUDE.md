@@ -58,9 +58,9 @@ darwin-rebuild --rollback
 
 ## 사용자 정보
 
-- **username**: ddingg (macOS 사용자명)
+- **username**: matthew (macOS 사용자명)
 - **system**: aarch64-darwin (Apple Silicon)
-- **hostname**: jomyeong-geun-ui-MacBookPro
+- **hostname**: matthewui-MacBookPro
 
 ## 작업 규칙
 

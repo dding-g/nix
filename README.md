@@ -14,7 +14,7 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | 모니터링 | `htop` `btop` `dust` `duf` `procs` |
 | Node.js | `volta` |
 | DevOps | `awscli2` `terraform` |
-| 사용자 | `httpie` `tldr` `tree` |
+| 사용자 | `httpie` `tldr` `tree` `wt` |
 
 ### Homebrew Formulae
 | 패키지 | 설명 |
@@ -161,5 +161,7 @@ mackup list | grep <app>
 │       ├── shell.nix           # Zsh + aliases
 │       ├── starship.nix        # 프롬프트
 │       └── programs.nix        # fzf, direnv, zoxide
+├── scripts/
+│   └── wt                      # Git Worktree Manager
 └── CLAUDE.md                   # AI 어시스턴트용 컨텍스트
 ```

@@ -8,6 +8,9 @@
     httpie
     tldr
     tree
+
+    # 커스텀 스크립트
+    (writeShellScriptBin "wt" (builtins.readFile ../../scripts/wt))
   ];
 
   # ═══════════════════════════════════════════════════════════

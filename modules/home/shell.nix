@@ -126,6 +126,10 @@
       # Java (Homebrew Temurin)
       export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 
+      # Editor
+      export EDITOR=zed
+      export LAUNCH_EDITOR=zed
+
       # ─────────────────────────────────────────
       # 커스텀 함수
       # ─────────────────────────────────────────
