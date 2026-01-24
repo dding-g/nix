@@ -145,6 +145,17 @@
       # 빠른 파일 검색 + 미리보기
       ff() { fzf --preview "bat --color=always {}" }
 
+      # owt shell integration - enables 'Enter' key to change directory
+      owt() {
+        local result
+        result=$(command owt "$@")
+        if [[ -d "$result" ]]; then
+          cd "$result"
+        else
+          echo "$result"
+        fi
+      }
+
       # ─────────────────────────────────────────
       # 로컬 환경변수 (git에 포함되지 않음)
       # ─────────────────────────────────────────
