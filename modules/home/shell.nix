@@ -130,6 +130,9 @@
       export EDITOR=zed
       export LAUNCH_EDITOR=zed
 
+      # Terminal
+      export TERMINAL=Ghostty
+
       # ─────────────────────────────────────────
       # 커스텀 함수
       # ─────────────────────────────────────────
