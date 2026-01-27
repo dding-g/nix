@@ -133,6 +133,9 @@
       # Terminal
       export TERMINAL=Ghostty
 
+      # bat theme
+      export BAT_THEME="Catppuccin Mocha"
+
       # ─────────────────────────────────────────
       # 커스텀 함수
       # ─────────────────────────────────────────

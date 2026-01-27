@@ -11,6 +11,7 @@ nix-darwin + home-manager를 사용한 macOS 개발 환경 자동화 설정입�
 | Modern CLI | `eza` `bat` `ripgrep` `fd` `fzf` |
 | 개발 | `neovim` `lazygit` `jq` `yq` `delta` `gh` |
 | Rust | `rustc` `cargo` |
+| Go | `go` |
 | 모니터링 | `htop` `btop` `dust` `duf` `procs` |
 | Node.js | `volta` |
 | DevOps | `awscli2` `terraform` |

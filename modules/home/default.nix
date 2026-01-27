@@ -20,5 +20,12 @@
 
     [applications_to_ignore]
     insomnia
+    zsh
+    starship
+    git
+    mackup
+    cursor
+    lazygit
+    macosx
   '';
 }
