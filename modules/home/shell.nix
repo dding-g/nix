@@ -75,6 +75,8 @@
       # 개발
       # ─────────────────────────────────────────
       pn = "pnpm";
+      cl = "claude";
+      cy = "claude --dangerously-skip-permissions";
       claude-yolo = "claude --dangerously-skip-permissions";
 
       # ─────────────────────────────────────────

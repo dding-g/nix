@@ -23,6 +23,7 @@
       "gemini-cli" # Gemini
       "railway" # Python deploy
       "git-flow"
+      "codex"  # OpenAI Codex CLI
     ];
 
     casks = [
