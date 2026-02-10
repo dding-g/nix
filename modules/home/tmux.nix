@@ -19,11 +19,26 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       yank                   # 시스템 클립보드 복사
+      battery                # 배터리 상태
+      cpu                    # CPU 사용량
       {
         plugin = catppuccin;
         extraConfig = ''
+          # ─────────────────────────────────────────
+          # Catppuccin 테마
+          # ─────────────────────────────────────────
           set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_status_background "default"
+
+          # 윈도우 스타일
           set -g @catppuccin_window_status_style "rounded"
+          set -g @catppuccin_window_number_position "left"
+          set -g @catppuccin_window_text " #W"
+          set -g @catppuccin_window_current_text " #W"
+          set -g @catppuccin_window_flags "icon"
+
+          # 모듈별 커스터마이징
+          set -g @catppuccin_date_time_text " %m/%d %H:%M"
         '';
       }
     ];
@@ -34,6 +49,16 @@
       # ─────────────────────────────────────────
       set -ag terminal-overrides ",xterm-256color:RGB"
       set -ag terminal-overrides ",xterm-ghostty:RGB"
+
+      # ─────────────────────────────────────────
+      # 상태바
+      # ─────────────────────────────────────────
+      set -g status-position top
+      set -g status-interval 5
+      set -g status-left-length 100
+      set -g status-right-length 100
+      set -g status-left "#{@catppuccin_status_session}"
+      set -gF status-right "#{@catppuccin_status_directory}#{@catppuccin_status_battery}#{@catppuccin_status_cpu}#{@catppuccin_status_date_time}"
 
       # ─────────────────────────────────────────
       # 윈도우/패인 분할
@@ -71,9 +96,6 @@
       set -g renumber-windows on     # 윈도우 닫으면 번호 재정렬
       set -g set-clipboard on        # 클립보드 연동
       set -g focus-events on         # 포커스 이벤트 전달
-
-      # 상태바 위치
-      set -g status-position top
     '';
   };
 }
