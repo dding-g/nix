@@ -6,6 +6,7 @@
     ./shell.nix
     ./starship.nix
     ./programs.nix
+    ./tmux.nix
   ];
 
   home.stateVersion = "24.05";
@@ -26,6 +27,7 @@
     mackup
     cursor
     lazygit
+    tmux
     macosx
   '';
 }

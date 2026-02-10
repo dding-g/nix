@@ -80,6 +80,14 @@
       claude-yolo = "claude --dangerously-skip-permissions";
 
       # ─────────────────────────────────────────
+      # tmux
+      # ─────────────────────────────────────────
+      ta = "tmux attach -t";
+      tl = "tmux list-sessions";
+      tn = "tmux new-session -s";
+      tk = "tmux kill-session -t";
+
+      # ─────────────────────────────────────────
       # 디렉토리 이동
       # ─────────────────────────────────────────
       dev = "cd ~/Developer";
