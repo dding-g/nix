@@ -1,4 +1,5 @@
 ---
+name: install
 description: nix-darwin 설정 적용 및 README 업데이트
 ---
 
