@@ -242,7 +242,7 @@ in
             fi
 
             # Rating 추출하여 직접 분류
-            rating=$(grep "^rating:" "$temp_output" | head -n 1 | awk '{print $2}' | tr -d ' "'"'"'')
+            rating=$(grep "^rating:" "$temp_output" | head -n 1 | awk '{print $2}' | tr -d " '\"")
             if ! [[ "$rating" =~ ^[0-9]+$ ]]; then
                 rating=0
             fi
