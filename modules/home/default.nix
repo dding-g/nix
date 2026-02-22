@@ -7,6 +7,7 @@
     ./starship.nix
     ./programs.nix
     ./tmux.nix
+    ./paper-review.nix
   ];
 
   home.stateVersion = "24.05";
