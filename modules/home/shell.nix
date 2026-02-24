@@ -78,6 +78,9 @@
       cl = "claude";
       cy = "claude --dangerously-skip-permissions";
       claude-yolo = "claude --dangerously-skip-permissions";
+      cx = "codex";
+      cxy = "codex --dangerously-bypass-approvals-and-sandbox";
+      codex-yolo = "codex --dangerously-bypass-approvals-and-sandbox";
 
       # ─────────────────────────────────────────
       # tmux

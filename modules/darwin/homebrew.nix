@@ -23,6 +23,7 @@
       "gemini-cli" # Gemini
       "railway" # Python deploy
       "git-flow"
+      "opencode" # OpenCode CLI
     ];
 
     casks = [

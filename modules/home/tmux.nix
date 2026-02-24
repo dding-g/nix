@@ -8,7 +8,7 @@
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
-    prefix = "C-a";
+    prefix = "C-Space";
     baseIndex = 1;           # 윈도우 번호 1부터 시작
     escapeTime = 0;          # ESC 딜레이 제거 (vim 사용 시 필수)
     historyLimit = 50000;
@@ -19,15 +19,23 @@
     plugins = with pkgs.tmuxPlugins; [
       sensible
       yank                   # 시스템 클립보드 복사
-      battery                # 배터리 상태
-      cpu                    # CPU 사용량
+      resurrect              # 세션 저장/복원
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '10'
+        '';
+      }
+      # battery, cpu는 catppuccin + status-right 설정 이후에 실행해야 interpolation 됨
+      # → extraConfig 하단에서 수동 run-shell
       {
         plugin = catppuccin;
         extraConfig = ''
           # ─────────────────────────────────────────
           # Catppuccin 테마
           # ─────────────────────────────────────────
-          set -g @catppuccin_flavor "mocha"
+          set -g @catppuccin_flavor "latte"
           set -g @catppuccin_status_background "default"
 
           # 윈도우 스타일
@@ -57,8 +65,17 @@
       set -g status-interval 5
       set -g status-left-length 100
       set -g status-right-length 100
-      set -g status-left "#{@catppuccin_status_session}"
-      set -gF status-right "#{@catppuccin_status_directory}#{@catppuccin_status_battery}#{@catppuccin_status_cpu}#{@catppuccin_status_date_time}"
+      # #{E:@...} 형식 필수 - E: 없으면 format string이 그대로 출력됨
+      set -g   status-left  "#{E:@catppuccin_status_session}"
+      set -g   status-right "#{E:@catppuccin_status_directory}"
+      set -agF status-right "#{E:@catppuccin_status_battery}"
+      set -agF status-right "#{E:@catppuccin_status_cpu}"
+      set -ag  status-right "#{E:@catppuccin_status_date_time}"
+
+      # battery/cpu 플러그인은 status-right에서 #{battery_icon} 등을 치환하는 방식이므로
+      # catppuccin + status-right 설정 이후에 실행해야 정상 동작함
+      run-shell ${pkgs.tmuxPlugins.battery}/share/tmux-plugins/battery/battery.tmux
+      run-shell ${pkgs.tmuxPlugins.cpu}/share/tmux-plugins/cpu/cpu.tmux
 
       # ─────────────────────────────────────────
       # 윈도우/패인 분할
