@@ -1,5 +1,62 @@
 { pkgs, ... }:
 
+let
+  # 각 윈도우 탭에 AI 도구 상태 아이콘 표시 (per-window)
+  # 상태: 🤖 작업중 | ⏳ 입력대기 | ❗ 에러 | 💤 유휴
+  aiIconScript = pkgs.writeShellScript "ai-icon.sh" ''
+    pane_pid="$1"
+    pane_id="$2"
+    [ -z "$pane_pid" ] && exit 0
+
+    # 프로세스 트리에서 AI 도구 감지
+    ps -eo pid=,ppid=,args= 2>/dev/null | awk -v root="$pane_pid" '
+    {
+      gsub(/^[[:space:]]+/, "")
+      pid = $1 + 0; ppid = $2 + 0
+      a = ""; for (i = 3; i <= NF; i++) a = a (i > 3 ? " " : "") $i
+      p[NR] = pid; pp[NR] = ppid; ar[NR] = a; n = NR
+    }
+    END {
+      q[root + 0] = 1; changed = 1
+      while (changed) { changed = 0; for (i = 1; i <= n; i++) if ((pp[i] in q) && !(p[i] in q)) { q[p[i]] = 1; changed = 1 } }
+      for (i = 1; i <= n; i++) if ((p[i] in q) && p[i] != (root + 0)) print ar[i]
+    }' | grep -qE 'claude|opencode|aider|copilot' || exit 0
+
+    # AI 도구 감지됨 → 패인 내용으로 상태 판별
+    content=""
+    [ -n "$pane_id" ] && content=$(tmux capture-pane -p -t "$pane_id" -S -15 2>/dev/null)
+
+    if [ -z "$content" ]; then
+      printf ' 💤'
+      exit 0
+    fi
+
+    # 에러 상태
+    if printf '%s' "$content" | grep -qiE '(\berror:\s|^ERROR[ :]|fatal error|panic:)'; then
+      printf ' ❗'
+      exit 0
+    fi
+
+    # 입력 대기 (질문, 권한 요청, Y/N 확인)
+    if printf '%s' "$content" | grep -qiE '(\[Y/n\]|\[y/N\]|\[y/n\]|y/n\)|Allow|Deny|always allow|approve|confirm\?|Continue\?|permission)'; then
+      printf ' ⏳'
+      exit 0
+    fi
+
+    # 작업중 (스피너, Thinking 등)
+    if printf '%s' "$content" | grep -qE '[⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏⣾⣽⣻⢿⡿⣟⣯⣷◐◓◑◒]'; then
+      printf ' 🤖'
+      exit 0
+    fi
+    if printf '%s' "$content" | grep -qiE '(Thinking|Generating|Streaming|Reasoning|Tool:|Running tool|Reading |Writing |Editing |Searching )'; then
+      printf ' 🤖'
+      exit 0
+    fi
+
+    # AI 도구 실행 중이지만 유휴 상태
+    printf ' 💤'
+  '';
+in
 {
   # ═══════════════════════════════════════════════════════════
   # tmux
@@ -41,8 +98,8 @@
           # 윈도우 스타일
           set -g @catppuccin_window_status_style "rounded"
           set -g @catppuccin_window_number_position "left"
-          set -g @catppuccin_window_text " #W"
-          set -g @catppuccin_window_current_text " #W"
+          set -g @catppuccin_window_text " #W#(${aiIconScript} #{pane_pid} #{pane_id})"
+          set -g @catppuccin_window_current_text " #W#(${aiIconScript} #{pane_pid} #{pane_id})"
           set -g @catppuccin_window_flags "icon"
 
           # 모듈별 커스터마이징
@@ -67,7 +124,7 @@
       set -g status-right-length 100
       # #{E:@...} 형식 필수 - E: 없으면 format string이 그대로 출력됨
       set -g   status-left  "#{E:@catppuccin_status_session}"
-      set -g   status-right "#{E:@catppuccin_status_directory}"
+      set -gF  status-right "#{E:@catppuccin_status_directory}"
       set -agF status-right "#{E:@catppuccin_status_battery}"
       set -agF status-right "#{E:@catppuccin_status_cpu}"
       set -ag  status-right "#{E:@catppuccin_status_date_time}"

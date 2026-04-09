@@ -14,6 +14,7 @@
 
     taps = [
       # 폰트는 이제 homebrew-cask에 통합됨
+      "steipete/tap"
     ];
 
     brews = [
@@ -58,6 +59,7 @@
       "claude-code"
       "chatgpt"
       "codex"  # OpenAI Codex CLI
+      "codexbar"
 
       # ─────────────────────────────────────────
       # 브라우저
