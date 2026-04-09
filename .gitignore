@@ -11,3 +11,6 @@ result-*
 
 # Environment
 .env
+
+.omx
+.omc
