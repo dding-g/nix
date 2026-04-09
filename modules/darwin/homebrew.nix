@@ -21,6 +21,7 @@
       "mackup"  # 앱 설정 백업/복원 (iCloud)
       "openjdk@17" # Java for React Navtive
       "gemini-cli" # Gemini
+      "glow" # Markdown pager
       "railway" # Python deploy
       "git-flow"
       "opencode" # OpenCode CLI
