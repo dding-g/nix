@@ -37,4 +37,11 @@
     enable = true;
     enableZshIntegration = true;
   };
+
+  # ═══════════════════════════════════════════════════════════
+  # Glow (Markdown pager)
+  # ═══════════════════════════════════════════════════════════
+  home.file.".config/glow/glow.yml".text = ''
+    style: "light"
+  '';
 }
