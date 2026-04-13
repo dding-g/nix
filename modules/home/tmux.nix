@@ -114,6 +114,7 @@ in
       # ─────────────────────────────────────────
       set -ag terminal-overrides ",xterm-256color:RGB"
       set -ag terminal-overrides ",xterm-ghostty:RGB"
+      set -g allow-passthrough on
 
       # ─────────────────────────────────────────
       # 상태바
