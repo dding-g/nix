@@ -26,7 +26,7 @@
         navigate = true;
         side-by-side = true;
         line-numbers = true;
-        syntax-theme = "Catppuccin Mocha";
+        syntax-theme = "Monokai Extended";
       };
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";

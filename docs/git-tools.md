@@ -17,7 +17,7 @@ git log -p               # delta로 자동 표시
 # - side-by-side: 좌우 비교
 # - line-numbers: 라인 번호 표시
 # - navigate: n/N으로 파일 간 이동
-# - 테마: Catppuccin Mocha
+# - 테마: Monokai Extended
 
 # delta 단독 사용
 diff file1 file2 | delta
