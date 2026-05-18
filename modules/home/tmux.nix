@@ -1,6 +1,17 @@
 { pkgs, ... }:
 
 let
+  tmuxSidebar = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-sidebar";
+    version = "unstable-2023-02-20";
+    src = pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tmux-sidebar";
+      rev = "a41d72c019093fd6a1216b044e111dd300684f1a";
+      sha256 = "1pk1md6kn9zqf11vym8idchpnsz9mzp083rarpgk0q6phnz15qp7";
+    };
+  };
+
   # 각 윈도우 탭에 AI 도구 상태 아이콘 표시 (per-window)
   # 상태: 🤖 작업중 | ⏳ 입력대기 | ❗ 에러 | 💤 유휴
   aiIconScript = pkgs.writeShellScript "ai-icon.sh" ''
@@ -76,6 +87,7 @@ in
     plugins = with pkgs.tmuxPlugins; [
       sensible
       yank                   # 시스템 클립보드 복사
+      tmuxSidebar            # prefix Tab: 현재 경로 트리 사이드바 토글
       resurrect              # 세션 저장/복원
       {
         plugin = continuum;

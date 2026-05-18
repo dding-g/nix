@@ -68,9 +68,10 @@
 
     if [ -f "$config_path" ]; then
       ${pkgs.jq}/bin/jq --arg notifier_pkg "$notifier_pkg" '
-        .plugin =
+        .plugin = (
           (if (.plugin | type) == "array" then .plugin else [] end)
           | if index($notifier_pkg) then . else . + [$notifier_pkg] end
+        )
       ' "$config_path" > "$tmp_path"
       mv "$tmp_path" "$config_path"
     else

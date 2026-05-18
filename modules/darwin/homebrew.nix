@@ -40,7 +40,7 @@
       "sublime-text"
       "zed"
       "opencode-desktop"
-      "cursor"
+      "visual-studio-code"
 
       # ─────────────────────────────────────────
       # 개발 도구
@@ -75,7 +75,7 @@
       "slack"
       "itsycal"
       "obsidian"
-      "linear-linear"
+      "linear"
 
       # ─────────────────────────────────────────
       # 폰트

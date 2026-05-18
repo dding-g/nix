@@ -181,6 +181,8 @@ prefix h/j/k/l   패인 이동 (vim 스타일)
 prefix H/J/K/L   패인 크기 조정 (5칸씩)
 prefix x          패인 닫기
 prefix z          패인 전체화면 토글
+prefix Tab        현재 경로 트리 사이드바 토글
+prefix Backspace  사이드바 토글 후 포커스 이동
 ```
 
 ### 복사 모드 (vi)
@@ -210,6 +212,7 @@ prefix I          플러그인 설치 (TPM)
 ### 플러그인
 - **sensible**: 합리적 기본 설정
 - **yank**: 시스템 클립보드 복사
+- **tmux-sidebar**: 현재 경로 트리 사이드바 (`prefix Tab`, `prefix Backspace`)
 - **resurrect**: 세션 저장/복원 (`prefix Ctrl+s` 저장, `prefix Ctrl+r` 복원)
 - **continuum**: 자동 저장 (10분 간격) + tmux 시작 시 자동 복원
 - **battery**: 배터리 상태 표시
