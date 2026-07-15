@@ -26,6 +26,7 @@
       "railway" # Python deploy
       "git-flow"
       "opencode" # OpenCode CLI
+      "mole" # Mac cleanup and optimization tool
     ];
 
     casks = [
