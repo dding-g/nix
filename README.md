@@ -161,5 +161,5 @@ mackup list | grep <app>
 │       └── paper-review.nix    # 논문 자동 리뷰 (Gemini CLI)
 ├── scripts/
 │   └── wt                      # Git Worktree Manager
-└── CLAUDE.md                   # AI 어시스턴트용 컨텍스트
+└── AGENT.md                    # AI 어시스턴트용 컨텍스트
 ```

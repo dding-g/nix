@@ -31,7 +31,7 @@
 │       ├── shell.nix           # Zsh 설정 + aliases
 │       ├── starship.nix        # 프롬프트 설정
 │       └── programs.nix        # fzf, direnv, zoxide
-└── CLAUDE.md                   # 이 파일
+└── AGENT.md                    # 이 파일
 ```
 
 ## 핵심 명령어

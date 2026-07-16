@@ -27,6 +27,7 @@
       "git-flow"
       "opencode" # OpenCode CLI
       "mole" # Mac cleanup and optimization tool
+      "killport" # Kill processes by port
     ];
 
     casks = [
