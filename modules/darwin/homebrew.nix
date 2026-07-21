@@ -15,6 +15,7 @@
     taps = [
       # 폰트는 이제 homebrew-cask에 통합됨
       "steipete/tap"
+      "stablyai/orca"
     ];
 
     brews = [
@@ -62,6 +63,7 @@
       "chatgpt"
       "codex"  # OpenAI Codex CLI
       "codexbar"
+      "stablyai/orca/orca"
 
       # ─────────────────────────────────────────
       # 브라우저
@@ -88,6 +90,7 @@
     masApps = {
       # mas search <app> 으로 ID 확인
       "KakaoTalk" = 869223134;
+      "RunCat Neo" = 6757801838;
       "Xcode" = 497799835;
     };
   };
