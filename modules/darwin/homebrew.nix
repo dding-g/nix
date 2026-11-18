@@ -41,7 +41,6 @@
       # 에디터 / IDE
       # ─────────────────────────────────────────
       "sublime-text"
-      "zed"
       "opencode-desktop"
       "visual-studio-code"
 
@@ -49,26 +48,15 @@
       # 개발 도구
       # ─────────────────────────────────────────
       "docker-desktop"
-      "insomnia"
-      "android-studio"
-      "figma"
-      "android-platform-tools"
-      "apidog"
 
       # ─────────────────────────────────────────
       # AI 도구
       # ─────────────────────────────────────────
-      "claude"
-      "claude-code"
-      "chatgpt"
-      "codex"  # OpenAI Codex CLI
-      "codexbar"
       "stablyai/orca/orca"
 
       # ─────────────────────────────────────────
       # 브라우저
       # ─────────────────────────────────────────
-      "zen"
       "google-chrome"
 
       # ─────────────────────────────────────────
@@ -86,12 +74,5 @@
       # ─────────────────────────────────────────
       "font-jetbrains-mono-nerd-font"
     ];
-
-    masApps = {
-      # mas search <app> 으로 ID 확인
-      "KakaoTalk" = 869223134;
-      "RunCat Neo" = 6757801838;
-      "Xcode" = 497799835;
-    };
   };
 }
